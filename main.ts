@@ -45,25 +45,3 @@ app.notFound((c) => {
 console.log(`🚀 Server running at ${appUrl} (port ${port})`);
 
 Deno.serve({ port }, app.fetch);
-
-// Mount route handlers
-app.route("/auth", createAuthRouter(clientId, clientSecret, appUrl, sessionSecret));
-app.route("/", createIndexRouter());
-app.route("/", createTosRouter());
-app.route("/", createPrivacyRouter());
-
-// 404 handler
-app.notFound((c) => {
-  return c.html(
-    `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>404 - Not Found</title>
-    <style>body{font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f5f5f5;}
-    .box{text-align:center;}.box h1{font-size:3rem;color:#1a73e8;}.box p{color:#666;}
-    .box a{color:#1a73e8;text-decoration:none;}</style></head>
-    <body><div class="box"><h1>404</h1><p>Page not found.</p><a href="/">← Back to home</a></div></body></html>`,
-    404,
-  );
-});
-
-console.log(`🚀 Server running at ${appUrl} (port ${port})`);
-
-Deno.serve({ port }, app.fetch);
